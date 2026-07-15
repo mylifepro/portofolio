@@ -1,9 +1,12 @@
 import { Mail, ArrowDown } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
+import resumefile from "../assets/file/Rochel.pdf";
 import profileImage from "../assets/images/id.png";
 import profile from "../data/profile";
+import statistics from "../data/statistics";
 import Button from "./ui/Button";
+import social from "../data/social";
+import SocialIcon from "./ui/SocialIcon";
 
 export default function Hero() {
   return (
@@ -78,7 +81,7 @@ export default function Hero() {
 
 
             
-            <Button href="/cv.pdf">
+            <Button href={resumefile}>
               Télécharger mon CV
             </Button>
 
@@ -86,7 +89,7 @@ export default function Hero() {
           </div>
           {/* Statistics */}
 <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
-  {profile.stats.map((stat) => (
+  {statistics.map((stat) => (
     <div key={stat.label} className="text-center">
       <h3 className="text-3xl font-bold text-emerald-400">
         {stat.value}
@@ -101,38 +104,56 @@ export default function Hero() {
 
 
           {/* Social icons */}
-          <div className="mt-8 flex gap-5">
+          {/* Social icons */}
+
+        <div
+          className="
+          mt-8
+          flex
+          gap-4
+          "
+          >
+
+          {
+          social.map((item)=>(
+
+          <a
+
+          key={item.name}
+
+          href={item.url}
+
+          target="_blank"
+
+          rel="noopener noreferrer"
+
+          className="
+          w-12
+          h-12
+          rounded-full
+          bg-zinc-900
+          border
+          border-zinc-800
+          flex
+          items-center
+          justify-center
+          text-zinc-400
+          hover:text-emerald-400
+          hover:border-emerald-400
+          transition
+          "
+
+          >
+
+          <SocialIcon icon={item.icon}/>
+
+          </a>
+
+          ))
+          }
 
 
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="..."
-            >
-              <FaGithub size={26}/>
-            </a>
-
-
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="..."
-            >
-              <FaLinkedin size={26}/>
-            </a>
-
-
-            <a
-               href={`mailto:${profile.email}`}
-              className="text-zinc-400 hover:text-emerald-400 transition"
-            >
-              <Mail size={26}/>
-            </a>
-
-
-          </div>
+        </div>
 
 
         </motion.div>
@@ -191,7 +212,7 @@ export default function Hero() {
       </div>
 
 
-      {/* Scroll indicator */}
+      {/* Scroll indication ito */}
       <motion.a
         href="#about"
         animate={{ y: [0, 10, 0] }}

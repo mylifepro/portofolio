@@ -1,7 +1,12 @@
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
+import Education from "./components/Education";
+import Experience from "./components/Experience";
 import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -9,23 +14,20 @@ function App() {
       <Navbar />
 
       <Hero />
-      <About/>
 
-      <Skills/>
+      <About />
 
-      <section
-        id="projects"
-        className="min-h-screen bg-zinc-900 flex items-center justify-center text-white"
-      >
-        PROJECTS
-      </section>
+      <Education />
 
-      <section
-        id="contact"
-        className="min-h-screen bg-zinc-950 flex items-center justify-center text-white"
-      >
-        CONTACT
-      </section>
+      <Experience />
+
+      <Skills />
+
+      <Projects />
+
+      <Contact />
+
+      <Footer />
     </>
   );
 }

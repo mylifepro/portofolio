@@ -1,8 +1,11 @@
 import { Code2, Database, Server, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 
+import profile from "../data/profile";
+import education from "../data/education";
 
-const skills = [
+
+const aboutSkills = [
   {
     icon: Code2,
     title: "Frontend",
@@ -28,240 +31,392 @@ const skills = [
     icon: Brain,
     title: "Intelligence Artificielle",
     description:
-      "Intérêt pour l'automatisation et l'intégration de solutions IA.",
+      "Intégration de solutions IA et automatisation des processus.",
   },
 ];
 
 
+
 export default function About() {
 
-  return (
-
-    <section
-      id="about"
-      className="
-      min-h-screen
-      bg-zinc-900
-      text-white
-      flex
-      items-center
-      "
-    >
-
-      <div className="
-        max-w-7xl
-        mx-auto
-        px-6
-        py-20
-        w-full
-      ">
-
-
-        {/* Title */}
-
-        <motion.div
-          initial={{
-            opacity:0,
-            y:40
-          }}
-
-          whileInView={{
-            opacity:1,
-            y:0
-          }}
 
-          transition={{
-            duration:0.8
-          }}
+return (
 
-          viewport={{
-            once:true
-          }}
+<section
+id="about"
+className="
+min-h-screen
+bg-zinc-900
+text-white
+flex
+items-center
+"
+>
 
-          className="text-center mb-16"
-        >
 
-          <h2 className="
-            text-4xl
-            md:text-5xl
-            font-bold
-          ">
-            À propos de 
-            <span className="text-emerald-400">
-              {" "}moi
-            </span>
-          </h2>
+<div
+className="
+max-w-7xl
+mx-auto
+px-6
+py-20
+w-full
+"
+>
 
 
-          <p className="
-            mt-4
-            text-zinc-400
-            max-w-2xl
-            mx-auto
-          ">
-            Découvrez mon parcours et mes domaines
-            d'expertise.
-          </p>
 
+{/* Title */}
 
-        </motion.div>
+<motion.div
 
+initial={{
+opacity:0,
+y:40
+}}
 
+whileInView={{
+opacity:1,
+y:0
+}}
 
-        <div className="
-          grid
-          md:grid-cols-2
-          gap-12
-          items-center
-        ">
+transition={{
+duration:0.8
+}}
 
+viewport={{
+once:true
+}}
 
-          {/* Description */}
+className="text-center mb-16"
 
-          <motion.div
+>
 
-            initial={{
-              opacity:0,
-              x:-50
-            }}
 
-            whileInView={{
-              opacity:1,
-              x:0
-            }}
+<h2
+className="
+text-4xl
+md:text-5xl
+font-bold
+"
+>
 
-            transition={{
-              duration:0.8
-            }}
+À propos de
 
-            viewport={{
-              once:true
-            }}
+<span className="text-emerald-400">
+{" "}moi
+</span>
 
-          >
 
-            <h3 className="
-              text-3xl
-              font-semibold
-              mb-6
-            ">
-              Développeur Full Stack
-            </h3>
+</h2>
 
 
-            <p className="
-              text-zinc-400
-              leading-relaxed
-              text-lg
-            ">
+<p
+className="
+mt-4
+text-zinc-400
+"
+>
 
-              Je suis passionné par la création
-              d'applications web modernes et évolutives.
+Découvrez mon parcours et mes domaines
+d'expertise.
 
-              Mon objectif est de construire des solutions
-              performantes avec une architecture propre,
-              une bonne expérience utilisateur et des
-              technologies modernes.
+</p>
 
-            </p>
 
+</motion.div>
 
-          </motion.div>
 
 
 
 
-          {/* Cards */}
+<div
+className="
+grid
+md:grid-cols-2
+gap-12
+items-center
+"
+>
 
-          <div className="
-            grid
-            sm:grid-cols-2
-            gap-6
-          ">
 
 
-            {skills.map((item,index)=>{
+{/* Description */}
 
-              const Icon=item.icon;
+<motion.div
 
+initial={{
+opacity:0,
+x:-50
+}}
 
-              return (
+whileInView={{
+opacity:1,
+x:0
+}}
 
-                <motion.div
+transition={{
+duration:0.8
+}}
 
-                  key={item.title}
+viewport={{
+once:true
+}}
 
-                  initial={{
-                    opacity:0,
-                    y:40
-                  }}
+>
 
-                  whileInView={{
-                    opacity:1,
-                    y:0
-                  }}
 
-                  transition={{
-                    delay:index*0.1
-                  }}
+<h3
+className="
+text-3xl
+font-semibold
+mb-6
+"
+>
 
-                  viewport={{
-                    once:true
-                  }}
+{profile.title}
 
-                  className="
-                    bg-zinc-950
-                    border
-                    border-zinc-800
-                    rounded-2xl
-                    p-6
-                    hover:border-emerald-400
-                    transition
-                  "
+</h3>
 
-                >
 
-                  <Icon
-                    size={35}
-                    className="text-emerald-400 mb-4"
-                  />
 
+<p
+className="
+text-zinc-400
+leading-relaxed
+text-lg
+"
+>
 
-                  <h4 className="
-                    text-xl
-                    font-semibold
-                    mb-2
-                  ">
-                    {item.title}
-                  </h4>
+{profile.description}
 
+</p>
 
-                  <p className="
-                    text-zinc-400
-                    text-sm
-                  ">
-                    {item.description}
-                  </p>
 
 
-                </motion.div>
 
-              )
 
-            })}
+{/* Formation */}
 
+<div
+className="
+mt-8
+"
+>
 
-          </div>
+<h4
+className="
+text-xl
+font-semibold
+mb-4
+text-emerald-400
+"
+>
 
+Formation
 
+</h4>
 
-        </div>
 
+{
+education.map((item)=>(
 
-      </div>
+<div
+key={item.diploma}
+className="
+bg-zinc-950
+border
+border-zinc-800
+rounded-xl
+p-5
+"
+>
 
+<h5
+className="
+font-bold
+"
+>
 
-    </section>
+{item.diploma}
 
-  );
+</h5>
+
+
+<p
+className="
+text-zinc-300
+mt-1
+"
+>
+
+{item.school}
+
+</p>
+
+
+<p
+className="
+text-sm
+text-zinc-400
+mt-2
+"
+>
+
+{item.period}
+
+</p>
+
+
+<p
+className="
+text-sm
+text-zinc-400
+mt-3
+"
+>
+
+{item.description}
+
+</p>
+
+
+</div>
+
+))
+
+}
+
+
+</div>
+
+
+</motion.div>
+
+
+
+
+
+
+{/* Cards compétences */}
+
+<div
+className="
+grid
+sm:grid-cols-2
+gap-6
+"
+>
+
+
+{
+aboutSkills.map((item,index)=>{
+
+
+const Icon=item.icon;
+
+
+return (
+
+<motion.div
+
+key={item.title}
+
+initial={{
+opacity:0,
+y:40
+}}
+
+whileInView={{
+opacity:1,
+y:0
+}}
+
+transition={{
+delay:index*0.1
+}}
+
+viewport={{
+once:true
+}}
+
+
+className="
+bg-zinc-950
+border
+border-zinc-800
+rounded-2xl
+p-6
+hover:border-emerald-400
+transition
+"
+
+>
+
+
+<Icon
+
+size={35}
+
+className="
+text-emerald-400
+mb-4
+"
+
+/>
+
+
+
+<h4
+className="
+text-xl
+font-semibold
+mb-2
+"
+>
+
+{item.title}
+
+</h4>
+
+
+<p
+className="
+text-zinc-400
+text-sm
+"
+>
+
+{item.description}
+
+</p>
+
+
+</motion.div>
+
+
+)
+
+
+})
+
+}
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+);
+
+
 }
