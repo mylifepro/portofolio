@@ -1,4 +1,4 @@
-import { Mail, ArrowDown } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
 import resumefile from "../assets/file/Rochel.pdf";
 import profileImage from "../assets/images/id.png";

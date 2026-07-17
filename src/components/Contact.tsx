@@ -443,7 +443,7 @@ space-y-6
 
 
 {
-informations.map((item,index)=>{
+informations.map((item)=>{
 
 
 const Icon=item.icon;
