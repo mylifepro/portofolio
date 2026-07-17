@@ -1,7 +1,19 @@
-import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
-import { motion } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Loader2
+} from "lucide-react";
 
-import { useState } from "react";
+import {
+  motion
+} from "framer-motion";
+
+import {
+  useState
+} from "react";
+
 import emailjs from "@emailjs/browser";
 
 import contact from "../data/contact";
@@ -9,25 +21,27 @@ import social from "../data/social";
 import SocialIcon from "./ui/SocialIcon";
 
 
+
 export default function Contact() {
 
 
-  const [form, setForm] = useState({
+  const [form,setForm] = useState({
 
     name:"",
     email:"",
     subject:"",
-    message:"",
+    message:""
 
   });
 
 
   const [loading,setLoading] = useState(false);
 
-
   const [success,setSuccess] = useState("");
 
   const [error,setError] = useState("");
+
+
 
 
 
@@ -37,6 +51,7 @@ export default function Contact() {
     >
   )=>{
 
+
     setForm({
 
       ...form,
@@ -45,7 +60,9 @@ export default function Contact() {
 
     });
 
+
   };
+
 
 
 
@@ -70,12 +87,12 @@ export default function Contact() {
 
 
 
-    const emailRegex =
+    const regex =
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
 
-    if(!emailRegex.test(form.email)){
+    if(!regex.test(form.email)){
 
 
       setError(
@@ -88,12 +105,14 @@ export default function Contact() {
     }
 
 
+
     setError("");
 
     return true;
 
 
   };
+
 
 
 
@@ -108,15 +127,14 @@ export default function Contact() {
 
 
 
-    if(!validate()) return;
+    if(!validate())
+      return;
 
 
 
     setLoading(true);
 
     setSuccess("");
-
-    setError("");
 
 
 
@@ -138,7 +156,7 @@ export default function Contact() {
 
           subject:form.subject,
 
-          message:form.message,
+          message:form.message
 
         },
 
@@ -150,7 +168,7 @@ export default function Contact() {
 
 
       setSuccess(
-        "Votre message a été envoyé avec succès."
+        "Message envoyé avec succès ✅"
       );
 
 
@@ -160,20 +178,20 @@ export default function Contact() {
         name:"",
         email:"",
         subject:"",
-        message:"",
+        message:""
 
       });
 
 
 
-    }catch(error){
+    }catch(err){
 
 
-      console.log(error);
+      console.log(err);
 
 
       setError(
-        "Erreur lors de l'envoi du message."
+        "Une erreur est survenue."
       );
 
 
@@ -187,552 +205,668 @@ export default function Contact() {
     }
 
 
+
   };
 
 
 
 
 
-  return (
 
-    <section
-      id="contact"
-      className="
-        min-h-screen
-        bg-white dark:bg-zinc-950
-        text-zinc-900 dark:text-white
-        py-20
-      "
-    >
 
+  const informations=[
 
-      <div
-        className="
-          max-w-7xl
-          mx-auto
-          px-6
-        "
-      >
+    {
+      icon:Mail,
+      title:"Email",
+      value:contact.email
+    },
 
 
-        {/* Title */}
+    {
+      icon:Phone,
+      title:"Téléphone",
+      value:contact.phone
+    },
 
 
-        <motion.div
+    {
+      icon:MapPin,
+      title:"Localisation",
+      value:contact.location
+    }
 
-          initial={{
-            opacity:0,
-            y:40
-          }}
+  ];
 
-          whileInView={{
-            opacity:1,
-            y:0
-          }}
 
-          transition={{
-            duration:.8
-          }}
 
-          viewport={{
-            once:true
-          }}
 
-          className="
-          text-center
-          mb-16
-          "
 
-        >
 
+return (
 
-          <h2
-            className="
-            text-4xl
-            md:text-5xl
-            font-bold
-            "
-          >
 
-            Me
+<section
 
-            <span
-              className="
-              text-emerald-400
-              "
-            >
+id="contact"
 
-              {" "}contacter
+className="
+relative
+overflow-hidden
+py-24
+bg-white
+dark:bg-zinc-950
+text-zinc-900
+dark:text-white
+"
 
-            </span>
 
+>
 
-          </h2>
 
+{/* Background */}
 
+<div
+className="
+absolute
+inset-0
+-z-10
+"
 
-          <p
-            className="
-            mt-4
-            text-zinc-400
-            max-w-2xl
-            mx-auto
-            "
-          >
+>
 
-            Vous avez un projet, une opportunité ou une question ?
-            N'hésitez pas à me contacter.
+<div
+className="
+absolute
+top-20
+left-20
+w-72
+h-72
+bg-emerald-500/20
+blur-3xl
+rounded-full
+"
 
-          </p>
+/>
 
 
-        </motion.div>
+<div
+className="
+absolute
+bottom-20
+right-20
+w-72
+h-72
+bg-cyan-500/20
+blur-3xl
+rounded-full
+"
 
+/>
 
 
+</div>
 
 
-        <div
-          className="
-          grid
-          lg:grid-cols-2
-          gap-10
-          "
-        >
 
 
 
-          {/* Informations */}
+<div
+className="
+max-w-7xl
+mx-auto
+px-6
+"
 
+>
 
-          <motion.div
 
-            initial={{
-              opacity:0,
-              x:-40
-            }}
+{/* Header */}
 
-            whileInView={{
-              opacity:1,
-              x:0
-            }}
 
-            viewport={{
-              once:true
-            }}
+<motion.div
 
-            className="space-y-6 "
+initial={{
+opacity:0,
+y:40
+}}
 
-          >
+whileInView={{
+opacity:1,
+y:0
+}}
 
+viewport={{
+once:true
+}}
 
+transition={{
+duration:.7
+}}
 
-            {
-              [
-                {
-                  icon:Mail,
-                  title:"Email",
-                  value:contact.email
-                },
+className="
+text-center
+mb-16
+"
 
-                {
-                  icon:Phone,
-                  title:"Téléphone",
-                  value:contact.phone
-                },
+>
 
-                {
-                  icon:MapPin,
-                  title:"Localisation",
-                  value:contact.location
-                }
 
-              ].map((item)=>(
+<h2
+className="
+text-4xl
+md:text-6xl
+font-black
+"
 
+>
 
-                <div
-                  key={item.title}
-                  className="
-                  bg-white
-          dark:bg-zinc-950
-          text-zinc-900
-          dark:text-white
-                  border
-                  border-zinc-200 dark:border-zinc-800
-                  rounded-2xl
-                  p-6
-                  "
-                >
+Me
 
+<span
+className="
+text-emerald-400
+"
+>
+{" "}contacter
+</span>
 
-                  <div
-                    className="
-                    flex
-                    items-center
-                    gap-4
-                    "
-                  >
+</h2>
 
 
-                    <item.icon
-                      className="
-                      text-emerald-400
-                      "
-                      size={28}
-                    />
 
+<p
+className="
+mt-5
+max-w-2xl
+mx-auto
+text-zinc-600
+dark:text-zinc-400
+text-lg
+"
 
-                    <div>
+>
 
+Un projet, une opportunité ou une question ?
+Je serai ravi d'échanger avec vous.
 
-                      <h3
-                        className="
-                        font-semibold
-                        "
-                      >
-                        {item.title}
-                      </h3>
+</p>
 
 
-                      <p
-                        className="
-                        text-zinc-400
-                        "
-                      >
-                        {item.value}
-                      </p>
+</motion.div>
 
 
-                    </div>
 
 
-                  </div>
 
 
-                </div>
 
 
+<div
+className="
+grid
+lg:grid-cols-2
+gap-12
+items-start
+"
 
-              ))
-            }
+>
 
 
 
 
 
-            <div
-              className="
-              bg-white
-              dark:bg-zinc-950
-              text-zinc-400
-              dark:text-white
-              flex
-              gap-4
-              pt-2
-              "
-            >
+{/* Informations */}
 
 
-              {
-                social.map((item)=>(
+<motion.div
 
+initial={{
+opacity:0,
+x:-50
+}}
 
-                  <a
+whileInView={{
+opacity:1,
+x:0
+}}
 
-                    key={item.name}
+viewport={{
+once:true
+}}
 
-                    href={item.url}
+className="
+space-y-6
+"
 
-                    target="_blank"
+>
 
-                    rel="noopener noreferrer"
 
+{
+informations.map((item,index)=>{
 
-                    className="
-                    w-12
-                    h-12
-                    rounded-full
-                    bg-zinc-900
-                    border
-                    border-zinc-200 dark:border-zinc-800
-                    flex
-                    items-center
-                    justify-center
-                    hover:bg-emerald-500
-                    transition
-                    "
 
-                  >
+const Icon=item.icon;
 
 
-                    <SocialIcon
-                      icon={item.icon}
-                      size={22}
-                    />
+return (
 
+<motion.div
 
-                  </a>
+key={item.title}
 
+whileHover={{
+y:-5
+}}
 
-                ))
-              }
+transition={{
+duration:.3
+}}
 
+className="
+p-6
+rounded-3xl
+bg-white/70
+dark:bg-zinc-900/60
+backdrop-blur
+border
+border-zinc-200
+dark:border-zinc-800
+shadow-lg
+"
 
+>
 
-            </div>
 
+<div
+className="
+flex
+items-center
+gap-5
+"
 
-          </motion.div>
+>
 
+<div
+className="
+w-14
+h-14
+rounded-2xl
+bg-emerald-500/20
+flex
+items-center
+justify-center
+"
 
+>
 
+<Icon
+size={28}
+className="
+text-emerald-400
+"
+/>
 
+</div>
 
-          {/* Formulaire */}
 
 
+<div>
 
-          <motion.form
+<h3
+className="
+font-bold
+text-lg
+"
 
-            onSubmit={handleSubmit}
+>
 
-            initial={{
-              opacity:0,
-              x:40
-            }}
+{item.title}
 
-            whileInView={{
-              opacity:1,
-              x:0
-            }}
+</h3>
 
-            viewport={{
-              once:true
-            }}
 
+<p
+className="
+text-zinc-500
+dark:text-zinc-400
+"
 
-            className="
-            bg-white
-          dark:bg-zinc-950
-          text-zinc-900
-          dark:text-white
-            border
-            border-zinc-200 dark:border-zinc-800
-            rounded-2xl
-            p-8
-            space-y-6
-            "
+>
 
-          >
+{item.value}
 
+</p>
 
 
-            <input
+</div>
 
-              name="name"
 
-              value={form.name}
+</div>
 
-              onChange={handleChange}
 
-              placeholder="Votre nom"
+</motion.div>
 
-              className="
-              w-full
-              bg-white dark:bg-zinc-950
-              border
-              border-zinc-700
-              rounded-lg
-              px-4
-              py-3
-              outline-none
-              focus:border-emerald-400
-              "
 
-            />
+)
 
+})
+}
 
 
 
-            <input
 
-              name="email"
 
-              value={form.email}
+{/* Social */}
 
-              onChange={handleChange}
+<div
+className="
+flex
+gap-4
+pt-4
+"
 
-              type="email"
+>
 
-              placeholder="Votre email"
+{
+social.map(item=>(
 
 
-              className="
-              w-full
-              bg-white dark:bg-zinc-950
-              border
-              border-zinc-700
-              rounded-lg
-              px-4
-              py-3
-              outline-none
-              focus:border-emerald-400
-              "
+<a
 
-            />
+key={item.name}
 
+href={item.url}
 
+target="_blank"
 
+rel="noopener noreferrer"
 
+className="
+w-12
+h-12
+rounded-full
+flex
+items-center
+justify-center
+bg-zinc-100
+dark:bg-zinc-900
+border
+border-zinc-200
+dark:border-zinc-800
+hover:border-emerald-400
+hover:text-emerald-400
+transition
+"
 
-            <input
+>
 
-              name="subject"
+<SocialIcon
+icon={item.icon}
+size={22}
+/>
 
-              value={form.subject}
 
-              onChange={handleChange}
+</a>
 
-              placeholder="Sujet"
 
+))
+}
 
-              className="
-              w-full
-              bg-white dark:bg-zinc-950
-              border
-              border-zinc-700
-              rounded-lg
-              px-4
-              py-3
-              outline-none
-              focus:border-emerald-400
-              "
 
-            />
+</div>
 
 
 
+</motion.div>
 
 
-            <textarea
 
-              name="message"
 
-              value={form.message}
 
-              onChange={handleChange}
 
-              rows={6}
 
-              placeholder="Votre message..."
 
 
-              className="
-              w-full
-              bg-white dark:bg-zinc-950
-              border
-              border-zinc-700
-              rounded-lg
-              px-4
-              py-3
-              outline-none
-              resize-none
-              focus:border-emerald-400
-              "
+{/* Formulaire */}
 
-            />
 
+<motion.form
 
+onSubmit={handleSubmit}
 
 
+initial={{
+opacity:0,
+x:50
+}}
 
-            {
-              success &&
+whileInView={{
+opacity:1,
+x:0
+}}
 
-              <p className="text-green-400">
+viewport={{
+once:true
+}}
 
-                {success}
 
-              </p>
-            }
+className="
+p-8
+rounded-3xl
+bg-white/70
+dark:bg-zinc-900/60
+backdrop-blur
+border
+border-zinc-200
+dark:border-zinc-800
+space-y-5
+shadow-xl
+"
 
+>
 
 
-            {
-              error &&
 
-              <p className="text-red-400">
+<input
 
-                {error}
+name="name"
 
-              </p>
-            }
+value={form.name}
 
+onChange={handleChange}
 
+placeholder="Votre nom"
 
+required
 
+className="
+input-style
+"
 
-            <button
+/>
 
-              disabled={loading}
 
-              className="
-              w-full
-              bg-emerald-500
-              hover:bg-emerald-600
-              rounded-lg
-              py-4
-              font-semibold
-              flex
-              justify-center
-              items-center
-              gap-2
-              transition
-              disabled:opacity-50
-              "
 
-            >
+<input
 
+name="email"
 
-              {
-                loading
-                ?
-                <>
-                  <Loader2
-                    className="animate-spin"
-                    size={20}
-                  />
+type="email"
 
-                  Envoi...
+value={form.email}
 
-                </>
-                :
-                <>
-                  <Send size={20}/>
+onChange={handleChange}
 
-                  Envoyer le message
+placeholder="Votre email"
 
-                </>
-              }
+required
 
+className="
+input-style
+"
 
+/>
 
-            </button>
 
 
 
-          </motion.form>
+<input
 
+name="subject"
 
+value={form.subject}
 
-        </div>
+onChange={handleChange}
 
+placeholder="Sujet"
 
-      </div>
+required
 
+className="
+input-style
+"
 
-    </section>
+/>
 
-  );
+
+
+<textarea
+
+name="message"
+
+rows={6}
+
+value={form.message}
+
+onChange={handleChange}
+
+placeholder="Votre message..."
+
+required
+
+className="
+input-style
+resize-none
+"
+
+/>
+
+
+
+
+
+{
+success &&
+
+<p
+className="
+text-emerald-400
+font-medium
+"
+>
+
+{success}
+
+</p>
+
+}
+
+
+
+{
+error &&
+
+<p
+className="
+text-red-400
+font-medium
+"
+>
+
+{error}
+
+</p>
+
+}
+
+
+
+
+
+<button
+
+disabled={loading}
+
+className="
+w-full
+py-4
+rounded-xl
+bg-emerald-500
+hover:bg-emerald-600
+text-white
+font-semibold
+flex
+justify-center
+items-center
+gap-3
+transition
+disabled:opacity-50
+"
+
+>
+
+
+{
+loading ?
+
+<>
+
+<Loader2
+className="
+animate-spin
+"
+/>
+
+Envoi...
+
+</>
+
+
+:
+
+<>
+
+<Send size={20}/>
+
+Envoyer le message
+
+</>
+
+}
+
+
+
+</button>
+
+
+
+</motion.form>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+);
+
 
 }

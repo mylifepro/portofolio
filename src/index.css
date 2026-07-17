@@ -10,3 +10,28 @@ body{
   margin:0;
   font-family:system-ui,sans-serif;
 }
+@layer components {
+
+.input-style {
+
+@apply
+w-full
+px-4
+py-3
+rounded-xl
+bg-white
+dark:bg-zinc-950
+border
+border-zinc-300
+dark:border-zinc-700
+outline-none
+transition
+focus:border-emerald-400
+focus:ring-2
+focus:ring-emerald-400/30
+text-zinc-900
+dark:text-white;
+
+}
+
+}
