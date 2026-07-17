@@ -12,8 +12,8 @@ export default function Skills() {
       id="skills"
       className="
         min-h-screen
-        bg-zinc-950
-        text-white
+        bg-white dark:bg-zinc-950
+        text-zinc-900 dark:text-white
         py-20
       "
     >
@@ -72,7 +72,7 @@ export default function Skills() {
           <p
             className="
               mt-4
-              text-zinc-400
+              text-zinc-600 dark:text-zinc-400
               max-w-2xl
               mx-auto
             "
@@ -94,9 +94,11 @@ export default function Skills() {
 
         <div
           className="
+          
             grid
             md:grid-cols-2
             gap-8
+            
           "
         >
 
@@ -133,9 +135,12 @@ export default function Skills() {
 
 
                   className="
-                    bg-zinc-900
+                    bg-white
+          dark:bg-zinc-950
+          text-zinc-900
+          dark:text-white
                     border
-                    border-zinc-800
+                    border-zinc-200 dark:border-zinc-800
                     rounded-2xl
                     p-8
                     hover:border-emerald-400
@@ -210,7 +215,7 @@ export default function Skills() {
 
                           <span
                             className="
-                              text-zinc-400
+                              text-zinc-600 dark:text-zinc-400
                               text-sm
                             "
                           >

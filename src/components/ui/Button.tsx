@@ -19,6 +19,9 @@ export default function Button({
         font-medium
         transition-all
         duration-300
+        shadow-lg
+shadow-emerald-500/20
+hover:shadow-xl
 
         ${
           primary

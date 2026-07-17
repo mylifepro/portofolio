@@ -1,33 +1,59 @@
 import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
+import { Briefcase, Calendar } from "lucide-react";
 
 import experience from "../data/experience";
 
 
 export default function Experience() {
 
+
   return (
 
     <section
       id="experience"
       className="
+        relative
+        overflow-hidden
         min-h-screen
-        bg-zinc-900
-        text-white
-        py-20
+        py-24
+        bg-zinc-50
+        dark:bg-zinc-950
+        text-zinc-900
+        dark:text-white
       "
     >
+
+
+      {/* Background decoration */}
+
+      <div
+        className="
+          absolute
+          top-20
+          right-20
+          w-72
+          h-72
+          bg-emerald-500/10
+          rounded-full
+          blur-3xl
+        "
+      />
+
+
 
       <div
         className="
           max-w-7xl
           mx-auto
           px-6
+          relative
+          z-10
         "
       >
 
 
-        {/* Title */}
+
+        {/* Header */}
 
         <motion.div
 
@@ -41,48 +67,58 @@ export default function Experience() {
             y:0
           }}
 
-          transition={{
-            duration:0.8
-          }}
-
           viewport={{
             once:true
           }}
 
+          transition={{
+            duration:.8
+          }}
+
           className="
             text-center
-            mb-16
+            mb-20
           "
 
         >
+
 
           <h2
             className="
               text-4xl
               md:text-5xl
-              font-bold
+              font-black
             "
           >
 
             Mon
-            <span className="text-emerald-400">
+
+            <span
+              className="
+                text-emerald-400
+              "
+            >
               {" "}expérience
             </span>
+
 
           </h2>
 
 
+
           <p
             className="
-              mt-4
-              text-zinc-400
+              mt-5
               max-w-2xl
               mx-auto
+              text-zinc-600
+              dark:text-zinc-400
+              text-lg
             "
           >
 
-            Découvrez mes expériences et les projets
-            sur lesquels j'ai travaillé.
+            Découvrez mon parcours professionnel,
+            mes missions et les technologies utilisées.
 
           </p>
 
@@ -93,30 +129,38 @@ export default function Experience() {
 
 
 
-        {/* Timeline */}
+
+        {/* Timeline container */}
+
 
         <div
           className="
             relative
-            max-w-4xl
+            max-w-5xl
             mx-auto
           "
         >
 
 
-          {/* Ligne verticale */}
+
+          {/* Timeline line */}
 
           <div
             className="
+              hidden
+              md:block
               absolute
-              left-4
-              md:left-1/2
+              left-1/2
               top-0
-              h-full
-              w-0.5
-              bg-zinc-700
+              bottom-0
+              w-px
+              bg-zinc-300
+              dark:bg-zinc-800
+              -translate-x-1/2
             "
           />
+
+
 
 
 
@@ -126,12 +170,13 @@ export default function Experience() {
 
               <motion.div
 
+
                 key={item.company}
 
 
                 initial={{
                   opacity:0,
-                  y:50
+                  y:60
                 }}
 
 
@@ -141,51 +186,70 @@ export default function Experience() {
                 }}
 
 
-                transition={{
-                  duration:0.6,
-                  delay:index*0.15
-                }}
-
-
                 viewport={{
                   once:true
                 }}
 
 
-                className="
+                transition={{
+                  duration:.7,
+                  delay:index*.15
+                }}
+
+
+
+                className={`
                   relative
-                  mb-12
                   flex
-                  md:justify-between
-                  items-start
-                "
+                  mb-16
+
+                  ${
+                    index % 2 === 0
+                    ?
+                    "md:justify-start"
+                    :
+                    "md:justify-end"
+                  }
+
+                `}
 
               >
 
 
 
-                {/* Point timeline */}
+
+                {/* Icon */}
 
                 <div
                   className="
                     absolute
                     left-0
                     md:left-1/2
-                    -translate-x-1/2
-                    w-9
-                    h-9
+                    -translate-x-0
+                    md:-translate-x-1/2
+
+                    w-12
+                    h-12
+
                     rounded-full
-                    bg-emerald-400
+
+                    bg-emerald-500
+
                     flex
                     items-center
                     justify-center
+
                     text-zinc-950
+
+                    shadow-lg
+                    shadow-emerald-500/30
+
                     z-10
                   "
                 >
 
                   <Briefcase
-                    size={18}
+                    size={22}
                   />
 
                 </div>
@@ -194,33 +258,60 @@ export default function Experience() {
 
 
 
+
+
                 {/* Card */}
+
 
                 <div
                   className="
-                    ml-14
+                    ml-16
+
                     md:ml-0
+
                     md:w-[45%]
-                    bg-zinc-950
+
+                    rounded-3xl
+
+                    p-7
+
+                    bg-white/80
+                    dark:bg-zinc-900/80
+
+                    backdrop-blur
+
                     border
-                    border-zinc-800
-                    rounded-2xl
-                    p-6
+
+                    border-zinc-200
+                    dark:border-zinc-800
+
                     hover:border-emerald-400
-                    transition
+
+                    hover:-translate-y-2
+
+                    transition-all
+
+                    duration-300
+
+                    shadow-lg
                   "
                 >
+
+
 
 
 
                   <div
                     className="
                       flex
+                      flex-col
+                      sm:flex-row
                       justify-between
-                      items-start
-                      gap-4
+                      gap-3
                     "
                   >
+
+
 
                     <h3
                       className="
@@ -234,17 +325,29 @@ export default function Experience() {
                     </h3>
 
 
+
+
+
                     <span
                       className="
+                        flex
+                        items-center
+                        gap-1
+
                         text-sm
+
                         text-emerald-400
-                        whitespace-nowrap
                       "
                     >
+
+                      <Calendar
+                        size={15}
+                      />
 
                       {item.period}
 
                     </span>
+
 
 
                   </div>
@@ -253,15 +356,21 @@ export default function Experience() {
 
 
 
+
+
                   <h4
                     className="
-                      mt-2
-                      text-zinc-300
-                      font-medium
+                      mt-3
+
+                      font-semibold
+
+                      text-zinc-700
+                      dark:text-zinc-300
                     "
                   >
 
                     {item.position}
+
 
                   </h4>
 
@@ -269,12 +378,18 @@ export default function Experience() {
 
 
 
+
                   <p
                     className="
-                      mt-4
+                      mt-5
+
                       text-sm
-                      text-zinc-400
+
                       leading-relaxed
+
+                      text-zinc-600
+
+                      dark:text-zinc-400
                     "
                   >
 
@@ -294,41 +409,57 @@ export default function Experience() {
                       flex
                       flex-wrap
                       gap-2
-                      mt-5
+                      mt-6
                     "
                   >
 
-                  {
-                    item.technologies.map((tech)=>(
+                    {
+                      item.technologies.map((tech)=>(
 
-                      <span
+                        <span
 
-                        key={tech}
+                          key={tech}
 
-                        className="
-                          px-3
-                          py-1
-                          rounded-full
-                          bg-zinc-800
-                          text-xs
-                          text-emerald-400
-                        "
+                          className="
+                            px-3
+                            py-1
 
-                      >
+                            rounded-full
 
-                        {tech}
+                            text-xs
 
-                      </span>
+                            bg-emerald-500/10
 
-                    ))
-                  }
+                            text-emerald-500
+
+                            border
+
+                            border-emerald-500/20
+
+                            hover:bg-emerald-500
+
+                            hover:text-white
+
+                            transition
+                          "
+
+                        >
+
+                          {tech}
+
+                        </span>
+
+                      ))
+                    }
 
 
                   </div>
 
 
 
+
                 </div>
+
 
 
               </motion.div>
@@ -339,11 +470,14 @@ export default function Experience() {
 
 
 
+
         </div>
 
 
 
+
       </div>
+
 
 
     </section>

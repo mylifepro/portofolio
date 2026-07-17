@@ -9,7 +9,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-zinc-950 border-t border-zinc-800 text-white">
+    <footer className=" bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white">
 
       <div className="max-w-7xl mx-auto px-6 py-12">
 
@@ -118,14 +118,14 @@ className="
 w-12
 h-12
 rounded-full
-bg-zinc-900
+bg-white dark:bg-zinc-950
 border
-border-zinc-800
+border-zinc-200 dark:border-zinc-800
 flex
 items-center
 justify-center
 text-zinc-400
-hover:text-white
+hover:text-zinc-900 dark:text-zinc-900 dark:text-white
 hover:bg-emerald-500
 transition-all
 "
@@ -151,7 +151,7 @@ size={22}
 
         {/* Ligne de séparation */}
 
-        <div className="border-t border-zinc-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-zinc-200 dark:border-zinc-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
 
           <p className="text-zinc-500 text-sm text-center md:text-left">
             © {year} {profile.lastName} {profile.firstName}. Tous droits réservés.

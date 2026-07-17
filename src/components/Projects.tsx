@@ -15,9 +15,12 @@ export default function Projects(){
       id="projects"
       className="
         min-h-screen
-        bg-zinc-900
-        text-white
+        text-zinc-900 dark:text-white
         py-20
+        bg-white
+          dark:bg-zinc-950
+          text-zinc-900
+          dark:text-white
       "
     >
 
@@ -137,9 +140,9 @@ export default function Projects(){
 
 
               className="
-                bg-zinc-950
+                bg-white dark:bg-zinc-950
                 border
-                border-zinc-800
+                border-zinc-200 dark:border-zinc-800
                 rounded-2xl
                 overflow-hidden
                 group

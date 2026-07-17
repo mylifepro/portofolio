@@ -199,8 +199,8 @@ export default function Contact() {
       id="contact"
       className="
         min-h-screen
-        bg-zinc-950
-        text-white
+        bg-white dark:bg-zinc-950
+        text-zinc-900 dark:text-white
         py-20
       "
     >
@@ -321,7 +321,7 @@ export default function Contact() {
               once:true
             }}
 
-            className="space-y-6"
+            className="space-y-6 "
 
           >
 
@@ -353,9 +353,12 @@ export default function Contact() {
                 <div
                   key={item.title}
                   className="
-                  bg-zinc-900
+                  bg-white
+          dark:bg-zinc-950
+          text-zinc-900
+          dark:text-white
                   border
-                  border-zinc-800
+                  border-zinc-200 dark:border-zinc-800
                   rounded-2xl
                   p-6
                   "
@@ -419,6 +422,10 @@ export default function Contact() {
 
             <div
               className="
+              bg-white
+              dark:bg-zinc-950
+              text-zinc-400
+              dark:text-white
               flex
               gap-4
               pt-2
@@ -447,7 +454,7 @@ export default function Contact() {
                     rounded-full
                     bg-zinc-900
                     border
-                    border-zinc-800
+                    border-zinc-200 dark:border-zinc-800
                     flex
                     items-center
                     justify-center
@@ -505,9 +512,12 @@ export default function Contact() {
 
 
             className="
-            bg-zinc-900
+            bg-white
+          dark:bg-zinc-950
+          text-zinc-900
+          dark:text-white
             border
-            border-zinc-800
+            border-zinc-200 dark:border-zinc-800
             rounded-2xl
             p-8
             space-y-6
@@ -529,7 +539,7 @@ export default function Contact() {
 
               className="
               w-full
-              bg-zinc-950
+              bg-white dark:bg-zinc-950
               border
               border-zinc-700
               rounded-lg
@@ -559,7 +569,7 @@ export default function Contact() {
 
               className="
               w-full
-              bg-zinc-950
+              bg-white dark:bg-zinc-950
               border
               border-zinc-700
               rounded-lg
@@ -588,7 +598,7 @@ export default function Contact() {
 
               className="
               w-full
-              bg-zinc-950
+              bg-white dark:bg-zinc-950
               border
               border-zinc-700
               rounded-lg
@@ -619,7 +629,7 @@ export default function Contact() {
 
               className="
               w-full
-              bg-zinc-950
+              bg-white dark:bg-zinc-950
               border
               border-zinc-700
               rounded-lg
