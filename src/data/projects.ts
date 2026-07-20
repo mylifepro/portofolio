@@ -16,16 +16,15 @@ const projects = [
       "PostgreSQL",
       "Docker",
       "Microservices",
-    ],
+      "rabbitMQ",
+        ],
 
     github:
       "https://github.com/mylifepro",
 
-    demo:
-      "#",
 
     category:
-      "Web Application"
+      "Backend"
   },
 
 
@@ -37,20 +36,20 @@ const projects = [
       "Application complète permettant la gestion des étudiants avec une architecture frontend et backend séparée.",
 
     image:
-      "/projects/student.png",
+      "/projects/gestion-etudiant.png",
 
     technologies:[
-      "Next.js",
-      "NestJS",
+      "React",
+      "Python",
       "PostgreSQL",
-      "TypeScript",
+      "Django",
     ],
 
     github:
       "https://github.com/mylifepro",
 
     demo:
-      "#",
+      "https://gestion-etudiant-zeta.vercel.app/",
 
     category:
       "Full Stack"
@@ -77,7 +76,7 @@ const projects = [
       "https://github.com/mylifepro",
 
     demo:
-      "#",
+      "https://rochel-portfolio.vercel.app/",
 
     category:
       "Frontend"

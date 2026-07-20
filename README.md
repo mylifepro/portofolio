@@ -5,9 +5,7 @@ Un portfolio moderne développé avec **React + Tailwind CSS**, mettant en avant
 
 ## 🌟 Aperçu
 
-[Visiter le site en ligne →] 
-
-
+![alt text](public/projects/portfolio.png)
 ## ✨ Fonctionnalités
 
 - Design moderne et responsive
@@ -23,8 +21,8 @@ Un portfolio moderne développé avec **React + Tailwind CSS**, mettant en avant
 - **Frontend** : React.js, Tailwind CSS
 - **Animations** : Framer Motion
 - **Icônes** : React Icons / Lucide
-- **Déploiement** : Vercel / Netlify
-- **Autres** : React Router, Axios, etc.
+- **Déploiement** : Vercel
+- **Autres** : React Router
 
 ## 📸 Captures d'écran
 
