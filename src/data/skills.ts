@@ -58,8 +58,16 @@ const skills: Skill[] = [
       level:85
     },
     {
+      name:"Laravel",
+      level:90
+    },
+    {
       name:"Node.js",
       level:80
+    },
+    {
+      name:"Django",
+      level:60
     },
     {
       name:"API REST",

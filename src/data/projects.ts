@@ -20,7 +20,13 @@ const projects = [
         ],
 
     github:
-      "https://github.com/mylifepro",
+      "https://github.com/mylifepro/CONSULTATION",
+
+
+
+    demo:
+      "https://github.com/mylifepro/CONSULTATION",
+
 
 
     category:
@@ -46,7 +52,7 @@ const projects = [
     ],
 
     github:
-      "https://github.com/mylifepro",
+      "https://github.com/mylifepro/Gestion_etudiant/tree/main/front",
 
     demo:
       "https://gestion-etudiant-zeta.vercel.app/",
@@ -73,7 +79,7 @@ const projects = [
     ],
 
     github:
-      "https://github.com/mylifepro",
+      "https://github.com/mylifepro/portofolio",
 
     demo:
       "https://rochel-portfolio.vercel.app/",
