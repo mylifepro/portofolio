@@ -1,562 +1,545 @@
-import { useEffect, useState } from "react";
-import { Download, Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Loader2
+} from "lucide-react";
 
-import navigation from "../data/navigation";
-import resumefile from "../assets/file/Rochel.pdf";
-import ThemeToggle from "./ui/ThemeToggle";
+import {
+  motion
+} from "framer-motion";
 
+import {
+  useState
+} from "react";
 
-export default function Navbar() {
+import emailjs from "@emailjs/browser";
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-
-
-  // Gestion du scroll + section active
-
-  useEffect(() => {
-
-    const handleScroll = () => {
-
-      setIsScrolled(window.scrollY > 20);
-
-
-      const scrollPosition = window.scrollY + 120;
-
-
-      navigation.forEach((item)=>{
-
-        const sectionId = item.href.replace("#","");
-
-        const section =
-          document.getElementById(sectionId);
-
-
-        if(!section) return;
-
-
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-
-
-        if(
-          scrollPosition >= sectionTop &&
-          scrollPosition <
-          sectionTop + sectionHeight
-        ){
-
-          setActiveSection(sectionId);
-
-        }
-
-      });
-
-    };
-
-
-    window.addEventListener(
-      "scroll",
-      handleScroll
-    );
-
-
-    handleScroll();
-
-
-    return ()=>{
-
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-
-    };
-
-
-  },[]);
+import contact from "../data/contact";
+import social from "../data/social";
+import SocialIcon from "./ui/SocialIcon";
 
 
 
-  // Navigation mobile et desktop
+export default function Contact() {
 
-  const handleNavigation = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href:string
+
+  const [form,setForm] = useState({
+
+    name:"",
+    email:"",
+    subject:"",
+    message:""
+
+  });
+
+
+  const [loading,setLoading] = useState(false);
+
+  const [success,setSuccess] = useState("");
+
+  const [error,setError] = useState("");
+
+
+
+
+
+  const handleChange = (
+    e:React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement
+    >
   )=>{
 
-    e.preventDefault();
 
+    setForm({
 
-    const id = href.replace("#","");
+      ...form,
 
+      [e.target.name]:e.target.value
 
-    const element =
-      document.getElementById(id);
+    });
 
-
-
-    if(element){
-
-      const navbarHeight = 80;
-
-
-      const position =
-        element.offsetTop - navbarHeight;
-
-
-      window.scrollTo({
-
-        top:position,
-
-        behavior:"smooth"
-
-      });
-
-    }
-
-
-    setIsOpen(false);
 
   };
 
 
 
+
+
+  const validate = ()=>{
+
+
+    if(
+      !form.name ||
+      !form.email ||
+      !form.subject ||
+      !form.message
+    ){
+
+      setError(
+        "Veuillez remplir tous les champs."
+      );
+
+      return false;
+
+    }
+
+
+
+    const regex =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+
+    if(!regex.test(form.email)){
+
+
+      setError(
+        "Adresse email invalide."
+      );
+
+
+      return false;
+
+    }
+
+
+
+    setError("");
+
+    return true;
+
+
+  };
+
+
+
+
+
+
+  const handleSubmit = async(
+    e:React.FormEvent
+  )=>{
+
+
+    e.preventDefault();
+
+
+
+    if(!validate())
+      return;
+
+
+
+    setLoading(true);
+
+    setSuccess("");
+
+
+
+    try{
+
+
+      await emailjs.send(
+
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+
+
+        {
+
+          from_name:form.name,
+
+          from_email:form.email,
+
+          subject:form.subject,
+
+          message:form.message
+
+        },
+
+
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+      );
+
+
+
+      setSuccess(
+        "Message envoyé avec succès ✅"
+      );
+
+
+
+      setForm({
+
+        name:"",
+        email:"",
+        subject:"",
+        message:""
+
+      });
+
+
+
+    }catch(err){
+
+
+      console.log(err);
+
+
+      setError(
+        "Une erreur est survenue."
+      );
+
+
+    }
+    finally{
+
+
+      setLoading(false);
+
+
+    }
+
+
+
+  };
+
+
+
+
+
+
+
+  const informations=[
+
+    {
+      icon:Mail,
+      title:"Email",
+      value:contact.email
+    },
+
+
+    {
+      icon:Phone,
+      title:"Téléphone",
+      value:contact.phone
+    },
+
+
+    {
+      icon:MapPin,
+      title:"Localisation",
+      value:contact.location
+    }
+
+  ];
+
+
+
+
+
+
 return (
 
-<header
 
-className={`
-fixed
-top-0
-left-0
-w-full
-z-50
-transition-all
-duration-300
+<section
 
-${
-isScrolled
-?
-`
-bg-white/80
-dark:bg-zinc-950/80
-backdrop-blur-xl
-shadow-lg
-border-b
-border-zinc-200
-dark:border-zinc-800
-`
-:
-"bg-transparent"
-}
+id="contact"
 
-`}
+className="
+relative
+overflow-hidden
+py-24
+bg-white
+dark:bg-zinc-950
+text-zinc-900
+dark:text-white
+"
+
 
 >
+
+
+{/* Background */}
+
+<div
+className="
+absolute
+inset-0
+-z-10
+"
+
+>
+
+<div
+className="
+absolute
+top-20
+left-20
+w-72
+h-72
+bg-emerald-500/20
+blur-3xl
+rounded-full
+"
+
+/>
 
 
 <div
+className="
+absolute
+bottom-20
+right-20
+w-72
+h-72
+bg-cyan-500/20
+blur-3xl
+rounded-full
+"
 
+/>
+
+
+</div>
+
+
+
+
+
+<div
 className="
 max-w-7xl
 mx-auto
-h-20
 px-6
-flex
-items-center
-justify-between
 "
 
 >
 
 
-{/* Logo */}
+{/* Header */}
 
-<motion.a
-
-whileHover={{
-scale:1.05
-}}
-
-href="#home"
-
-onClick={(e)=>
-handleNavigation(e,"#home")
-}
-
-className="
-text-3xl
-font-black
-tracking-tight
-"
-
->
-
-<span className="text-emerald-500">
-
-Rochel
-
-</span>
-
-
-<span className="text-zinc-900 dark:text-white">
-
-.
-
-</span>
-
-
-</motion.a>
-
-
-
-
-{/* Desktop Menu */}
-
-
-<nav
-
-className="
-hidden
-lg:flex
-items-center
-gap-2
-"
-
->
-
-
-{
-navigation.map((link)=>{
-
-
-const id =
-link.href.replace("#","");
-
-
-const active =
-activeSection===id;
-
-
-
-return (
-
-<a
-
-key={link.name}
-
-href={link.href}
-
-onClick={(e)=>
-handleNavigation(e,link.href)
-}
-
-
-className={`
-
-relative
-px-4
-py-2
-rounded-full
-font-medium
-transition-all
-duration-300
-
-
-${
-active
-?
-`
-text-emerald-500
-bg-emerald-500/10
-`
-:
-`
-text-zinc-700
-dark:text-zinc-300
-
-hover:text-emerald-500
-
-hover:bg-zinc-100
-
-dark:hover:bg-zinc-900
-
-`
-}
-
-`}
-
->
-
-{link.name}
-
-
-</a>
-
-)
-
-})
-
-}
-
-
-</nav>
-
-
-
-
-
-{/* Actions */}
-
-
-<div className="
-flex
-items-center
-gap-3
-">
-
-
-<ThemeToggle />
-
-
-
-<a
-
-href={resumefile}
-
-className="
-hidden
-md:flex
-items-center
-gap-2
-px-5
-py-3
-rounded-full
-bg-emerald-500
-hover:bg-emerald-600
-text-white
-font-medium
-transition
-shadow-lg
-shadow-emerald-500/30
-hover:scale-105
-"
-
->
-
-
-<Download size={18}/>
-
-
-CV
-
-
-</a>
-
-
-
-
-<button
-
-onClick={()=>
-setIsOpen(!isOpen)
-}
-
-
-className="
-lg:hidden
-p-2
-rounded-lg
-text-zinc-800
-dark:text-white
-hover:bg-zinc-100
-dark:hover:bg-zinc-900
-transition
-"
-
->
-
-
-{
-
-isOpen
-?
-<X size={28}/>
-:
-<Menu size={28}/>
-
-}
-
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-{/* Mobile Menu */}
-
-
-
-<AnimatePresence>
-
-
-{
-
-isOpen && (
 
 <motion.div
 
 initial={{
 opacity:0,
-height:0
+y:40
 }}
 
-animate={{
+whileInView={{
 opacity:1,
-height:"auto"
+y:0
 }}
 
-exit={{
-opacity:0,
-height:0
+viewport={{
+once:true
 }}
 
 transition={{
-duration:0.25
+duration:.7
 }}
 
 className="
-lg:hidden
-overflow-hidden
+text-center
+mb-16
 "
-
 
 >
 
 
+<h2
+className="
+text-4xl
+md:text-6xl
+font-black
+"
+
+>
+
+Me
+
+<span
+className="
+text-emerald-400
+"
+>
+{" "}contacter
+</span>
+
+</h2>
+
+
+
+<p
+className="
+mt-5
+max-w-2xl
+mx-auto
+text-zinc-600
+dark:text-zinc-400
+text-lg
+"
+
+>
+
+Un projet, une opportunité ou une question ?
+Je serai ravi d'échanger avec vous.
+
+</p>
+
+
+</motion.div>
+
+
+
+
+
+
+
+
 <div
+className="
+grid
+lg:grid-cols-2
+gap-12
+items-start
+"
+
+>
+
+
+
+
+
+{/* Informations */}
+
+
+<motion.div
+
+initial={{
+opacity:0,
+x:-50
+}}
+
+whileInView={{
+opacity:1,
+x:0
+}}
+
+viewport={{
+once:true
+}}
 
 className="
-bg-white
-dark:bg-zinc-950
-border-t
-border-zinc-200
-dark:border-zinc-800
-px-6
-py-6
-space-y-3
+space-y-6
 "
 
 >
 
 
 {
+informations.map((item)=>{
 
-navigation.map((link)=>{
 
-
-const active =
-activeSection ===
-link.href.replace("#","");
-
+const Icon=item.icon;
 
 
 return (
 
-<a
+<motion.div
 
-key={link.name}
+key={item.title}
 
-href={link.href}
+whileHover={{
+y:-5
+}}
 
-onClick={(e)=>
-handleNavigation(e,link.href)
-}
-
-
-className={`
-
-block
-rounded-xl
-px-4
-py-3
-transition
-
-
-${
-active
-?
-`
-bg-emerald-500/10
-text-emerald-500
-`
-:
-`
-text-zinc-700
-dark:text-zinc-300
-
-hover:bg-zinc-100
-
-dark:hover:bg-zinc-900
-
-`
-}
-
-`}
-
->
-
-{link.name}
-
-
-</a>
-
-)
-
-
-})
-
-}
-
-
-
-<a
-
-href={resumefile}
+transition={{
+duration:.3
+}}
 
 className="
-mt-4
-flex
-items-center
-justify-center
-gap-2
-rounded-xl
-bg-emerald-500
-py-3
-text-white
-font-medium
-hover:bg-emerald-600
-transition
+p-6
+rounded-3xl
+bg-white/70
+dark:bg-zinc-900/60
+backdrop-blur
+border
+border-zinc-200
+dark:border-zinc-800
+shadow-lg
 "
 
 >
 
-<Download size={18}/>
+
+<div
+className="
+flex
+items-center
+gap-5
+"
+
+>
+
+<div
+className="
+w-14
+h-14
+rounded-2xl
+bg-emerald-500/20
+flex
+items-center
+justify-center
+"
+
+>
+
+<Icon
+size={28}
+className="
+text-emerald-400
+"
+/>
+
+</div>
 
 
-Télécharger le CV
+
+<div>
+
+<h3
+className="
+font-bold
+text-lg
+"
+
+>
+
+{item.title}
+
+</h3>
 
 
-</a>
+<p
+className="
+text-zinc-500
+dark:text-zinc-400
+"
+
+>
+
+{item.value}
+
+</p>
+
+
+</div>
 
 
 </div>
@@ -567,17 +550,323 @@ Télécharger le CV
 
 )
 
+})
+}
+
+
+
+
+
+{/* Social */}
+
+<div
+className="
+flex
+gap-4
+pt-4
+"
+
+>
+
+{
+social.map(item=>(
+
+
+<a
+
+key={item.name}
+
+href={item.url}
+
+target="_blank"
+
+rel="noopener noreferrer"
+
+className="
+w-12
+h-12
+rounded-full
+flex
+items-center
+justify-center
+bg-zinc-100
+dark:bg-zinc-900
+border
+border-zinc-200
+dark:border-zinc-800
+hover:border-emerald-400
+hover:text-emerald-400
+transition
+"
+
+>
+
+<SocialIcon
+icon={item.icon}
+size={22}
+/>
+
+
+</a>
+
+
+))
+}
+
+
+</div>
+
+
+
+</motion.div>
+
+
+
+
+
+
+
+
+
+{/* Formulaire */}
+
+
+<motion.form
+
+onSubmit={handleSubmit}
+
+
+initial={{
+opacity:0,
+x:50
+}}
+
+whileInView={{
+opacity:1,
+x:0
+}}
+
+viewport={{
+once:true
+}}
+
+
+className="
+p-8
+rounded-3xl
+bg-white/70
+dark:bg-zinc-900/60
+backdrop-blur
+border
+border-zinc-200
+dark:border-zinc-800
+space-y-5
+shadow-xl
+"
+
+>
+
+
+
+<input
+
+name="name"
+
+value={form.name}
+
+onChange={handleChange}
+
+placeholder="Votre nom"
+
+required
+
+className="
+input-style
+"
+
+/>
+
+
+
+<input
+
+name="email"
+
+type="email"
+
+value={form.email}
+
+onChange={handleChange}
+
+placeholder="Votre email"
+
+required
+
+className="
+input-style
+"
+
+/>
+
+
+
+
+<input
+
+name="subject"
+
+value={form.subject}
+
+onChange={handleChange}
+
+placeholder="Sujet"
+
+required
+
+className="
+input-style
+"
+
+/>
+
+
+
+<textarea
+
+name="message"
+
+rows={6}
+
+value={form.message}
+
+onChange={handleChange}
+
+placeholder="Votre message..."
+
+required
+
+className="
+input-style
+resize-none
+"
+
+/>
+
+
+
+
+
+{
+success &&
+
+<p
+className="
+text-emerald-400
+font-medium
+"
+>
+
+{success}
+
+</p>
 
 }
 
 
-</AnimatePresence>
+
+{
+error &&
+
+<p
+className="
+text-red-400
+font-medium
+"
+>
+
+{error}
+
+</p>
+
+}
 
 
 
-</header>
+
+
+<button
+
+disabled={loading}
+
+className="
+w-full
+py-4
+rounded-xl
+bg-emerald-500
+hover:bg-emerald-600
+text-white
+font-semibold
+flex
+justify-center
+items-center
+gap-3
+transition
+disabled:opacity-50
+"
+
+>
+
+
+{
+loading ?
+
+<>
+
+<Loader2
+className="
+animate-spin
+"
+/>
+
+Envoi...
+
+</>
+
+
+:
+
+<>
+
+<Send size={20}/>
+
+Envoyer le message
+
+</>
+
+}
+
+
+
+</button>
+
+
+
+</motion.form>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
 
 
 );
+
 
 }

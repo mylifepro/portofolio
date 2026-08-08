@@ -40,57 +40,105 @@ export default function Navbar() {
 
     handleScroll();
 
-    return () =>
+    return () => {
       window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
+  /*
+   * Fermer le menu mobile si la fenêtre devient desktop.
+   */
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  /*
+   * Empêcher le scroll de la page lorsque le menu mobile est ouvert.
+   */
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const closeMobileMenu = () => {
+    setIsOpen(false);
+  };
 
   return (
     <header
       className={`
-fixed
-top-0
-left-0
-w-full
-z-50
-transition-all
-duration-300
+        fixed
+        top-0
+        left-0
+        w-full
+        z-50
+        transition-all
+        duration-300
 
-${
-  isScrolled
-    ? `
-bg-white/80
-dark:bg-zinc-950/80
-backdrop-blur-xl
-shadow-lg
-border-b
-border-zinc-200
-dark:border-zinc-800
-`
-    : "bg-transparent"
-}
-`}
+        ${
+          isScrolled
+            ? `
+              bg-white/90
+              dark:bg-zinc-950/90
+              backdrop-blur-xl
+              shadow-lg
+              border-b
+              border-zinc-200
+              dark:border-zinc-800
+            `
+            : `
+              bg-transparent
+            `
+        }
+      `}
     >
+
+      {/* =========================
+          NAVBAR PRINCIPALE
+      ========================== */}
+
       <div
         className="
-max-w-7xl
-mx-auto
-h-20
-px-6
-flex
-items-center
-justify-between
-"
+          max-w-7xl
+          mx-auto
+          h-20
+          px-6
+          flex
+          items-center
+          justify-between
+        "
       >
-        {/* Logo */}
+
+        {/* =========================
+            LOGO
+        ========================== */}
 
         <motion.a
           whileHover={{ scale: 1.05 }}
           href="#home"
+          onClick={closeMobileMenu}
           className="
-text-3xl
-font-black
-tracking-tight
-"
+            text-3xl
+            font-black
+            tracking-tight
+          "
         >
           <span className="text-emerald-500">
             Rochel
@@ -101,17 +149,21 @@ tracking-tight
           </span>
         </motion.a>
 
-        {/* Desktop */}
+
+        {/* =========================
+            NAVIGATION DESKTOP
+        ========================== */}
 
         <nav
           className="
-hidden
-lg:flex
-items-center
-gap-2
-"
+            hidden
+            lg:flex
+            items-center
+            gap-2
+          "
         >
           {navigation.map((link) => {
+
             const active =
               activeSection ===
               link.href.replace("#", "");
@@ -121,29 +173,29 @@ gap-2
                 key={link.name}
                 href={link.href}
                 className={`
-relative
-px-4
-py-2
-rounded-full
-font-medium
-transition-all
-duration-300
+                  relative
+                  px-4
+                  py-2
+                  rounded-full
+                  font-medium
+                  transition-all
+                  duration-300
 
-${
-  active
-    ? `
-text-emerald-500
-bg-emerald-500/10
-`
-    : `
-text-zinc-700
-dark:text-zinc-300
-hover:text-emerald-500
-hover:bg-zinc-100
-dark:hover:bg-zinc-900
-`
-}
-`}
+                  ${
+                    active
+                      ? `
+                        text-emerald-500
+                        bg-emerald-500/10
+                      `
+                      : `
+                        text-zinc-700
+                        dark:text-zinc-300
+                        hover:text-emerald-500
+                        hover:bg-zinc-100
+                        dark:hover:bg-zinc-900
+                      `
+                  }
+                `}
               >
                 {link.name}
               </a>
@@ -151,152 +203,238 @@ dark:hover:bg-zinc-900
           })}
         </nav>
 
-        {/* Right */}
 
-        <div className="flex items-center gap-3">
+        {/* =========================
+            PARTIE DROITE
+        ========================== */}
+
+        <div
+          className="
+            flex
+            items-center
+            gap-3
+          "
+        >
+
+          {/* Theme */}
+
           <ThemeToggle />
+
+
+          {/* CV Desktop */}
 
           <a
             href={resumefile}
+            target="_blank"
+            rel="noopener noreferrer"
             className="
-hidden
-md:flex
-items-center
-gap-2
-px-5
-py-3
-rounded-full
-bg-emerald-500
-hover:bg-emerald-600
-text-white
-font-medium
-transition
-shadow-lg
-shadow-emerald-500/30
-hover:scale-105
-"
+              hidden
+              lg:flex
+              items-center
+              gap-2
+              px-5
+              py-3
+              rounded-full
+              bg-emerald-500
+              hover:bg-emerald-600
+              text-white
+              font-medium
+              transition
+              shadow-lg
+              shadow-emerald-500/30
+              hover:scale-105
+            "
           >
             <Download size={18} />
 
             CV
           </a>
 
+
+          {/* =========================
+              BOUTON MENU MOBILE
+          ========================== */}
+
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            type="button"
+            aria-label={
+              isOpen
+                ? "Fermer le menu"
+                : "Ouvrir le menu"
+            }
+            aria-expanded={isOpen}
+            onClick={() => setIsOpen((prev) => !prev)}
             className="
-lg:hidden
-p-2
-rounded-lg
-text-zinc-800
-dark:text-white
-hover:bg-zinc-100
-dark:hover:bg-zinc-900
-transition
-"
+              flex
+              lg:hidden
+              items-center
+              justify-center
+              w-11
+              h-11
+              rounded-xl
+              text-zinc-800
+              dark:text-white
+              bg-zinc-100
+              dark:bg-zinc-900
+              border
+              border-zinc-200
+              dark:border-zinc-800
+              hover:text-emerald-500
+              hover:border-emerald-400
+              transition-all
+            "
           >
+
             {isOpen ? (
-              <X size={28} />
+              <X size={26} />
             ) : (
-              <Menu size={28} />
+              <Menu size={26} />
             )}
+
           </button>
+
         </div>
+
       </div>
 
-      {/* Mobile */}
+
+      {/* =========================
+          MENU MOBILE
+      ========================== */}
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{
               opacity: 0,
-              height: 0,
+              y: -10,
             }}
             animate={{
               opacity: 1,
-              height: "auto",
+              y: 0,
             }}
             exit={{
               opacity: 0,
-              height: 0,
+              y: -10,
             }}
             transition={{
-              duration: 0.25,
+              duration: 0.2,
             }}
             className="
-lg:hidden
-overflow-hidden
-"
+              lg:hidden
+              absolute
+              top-20
+              left-0
+              w-full
+              bg-white
+              dark:bg-zinc-950
+              border-t
+              border-zinc-200
+              dark:border-zinc-800
+              shadow-2xl
+            "
           >
+
             <div
               className="
-bg-white
-dark:bg-zinc-950
-border-t
-border-zinc-200
-dark:border-zinc-800
-px-6
-py-6
-space-y-3
-"
+                max-w-7xl
+                mx-auto
+                px-6
+                py-6
+              "
             >
-              {navigation.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`
-block
-rounded-xl
-px-4
-py-3
-transition
 
-${
-  activeSection ===
-  link.href.replace("#", "")
-    ? `
-bg-emerald-500/10
-text-emerald-500
-`
-    : `
-text-zinc-700
-dark:text-zinc-300
-hover:bg-zinc-100
-dark:hover:bg-zinc-900
-`
-}
-`}
-                >
-                  {link.name}
-                </a>
-              ))}
+              {/* Navigation */}
+
+              <nav
+                className="
+                  flex
+                  flex-col
+                  gap-2
+                "
+              >
+
+                {navigation.map((link) => {
+
+                  const active =
+                    activeSection ===
+                    link.href.replace("#", "");
+
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={closeMobileMenu}
+                      className={`
+                        block
+                        rounded-xl
+                        px-4
+                        py-3
+                        font-medium
+                        transition-all
+
+                        ${
+                          active
+                            ? `
+                              bg-emerald-500/10
+                              text-emerald-500
+                            `
+                            : `
+                              text-zinc-700
+                              dark:text-zinc-300
+                              hover:bg-zinc-100
+                              dark:hover:bg-zinc-900
+                              hover:text-emerald-500
+                            `
+                        }
+                      `}
+                    >
+                      {link.name}
+                    </a>
+                  );
+                })}
+
+              </nav>
+
+
+              {/* CV Mobile */}
 
               <a
                 href={resumefile}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMobileMenu}
                 className="
-mt-4
-flex
-items-center
-justify-center
-gap-2
-rounded-xl
-bg-emerald-500
-py-3
-text-white
-font-medium
-hover:bg-emerald-600
-transition
-"
+                  mt-5
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  rounded-xl
+                  bg-emerald-500
+                  py-3
+                  text-white
+                  font-medium
+                  hover:bg-emerald-600
+                  transition
+                  shadow-lg
+                  shadow-emerald-500/20
+                "
               >
+
                 <Download size={18} />
 
                 Télécharger le CV
+
               </a>
+
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
+
     </header>
   );
 }
+

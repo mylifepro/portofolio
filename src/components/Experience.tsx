@@ -58,21 +58,21 @@ export default function Experience() {
         <motion.div
 
           initial={{
-            opacity:0,
-            y:40
+            opacity: 0,
+            y: 40
           }}
 
           whileInView={{
-            opacity:1,
-            y:0
+            opacity: 1,
+            y: 0
           }}
 
           viewport={{
-            once:true
+            once: true
           }}
 
           transition={{
-            duration:.8
+            duration: .8
           }}
 
           className="
@@ -165,7 +165,7 @@ export default function Experience() {
 
 
           {
-            experience.map((item,index)=>(
+            experience.map((item, index) => (
 
 
               <motion.div
@@ -175,25 +175,25 @@ export default function Experience() {
 
 
                 initial={{
-                  opacity:0,
-                  y:60
+                  opacity: 0,
+                  y: 60
                 }}
 
 
                 whileInView={{
-                  opacity:1,
-                  y:0
+                  opacity: 1,
+                  y: 0
                 }}
 
 
                 viewport={{
-                  once:true
+                  once: true
                 }}
 
 
                 transition={{
-                  duration:.7,
-                  delay:index*.15
+                  duration: .7,
+                  delay: index * .15
                 }}
 
 
@@ -203,8 +203,7 @@ export default function Experience() {
                   flex
                   mb-16
 
-                  ${
-                    index % 2 === 0
+                  ${index % 2 === 0
                     ?
                     "md:justify-start"
                     :
@@ -414,7 +413,7 @@ export default function Experience() {
                   >
 
                     {
-                      item.technologies.map((tech)=>(
+                      item.technologies.map((tech) => (
 
                         <span
 
