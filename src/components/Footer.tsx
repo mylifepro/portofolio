@@ -506,8 +506,9 @@ export default function Footer() {
 
 
         {/* =====================================================
-            TECHNOLOGIES
+            TECHNOLOGIES 
         ====================================================== */}
+        
 
         <div
           className="

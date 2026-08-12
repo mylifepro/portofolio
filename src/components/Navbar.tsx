@@ -3,13 +3,16 @@ import { Download, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import navigation from "../data/navigation";
-import resumefile from "../assets/file/Rochel.pdf";
 import ThemeToggle from "./ui/ThemeToggle";
+const resumeUrl =
+  "https://canva.link/vkfiwl41d9odhym";
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -224,7 +227,7 @@ export default function Navbar() {
           {/* CV Desktop */}
 
           <a
-            href={resumefile}
+            href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="
@@ -400,7 +403,7 @@ export default function Navbar() {
               {/* CV Mobile */}
 
               <a
-                href={resumefile}
+                href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={closeMobileMenu}
@@ -424,7 +427,7 @@ export default function Navbar() {
 
                 <Download size={18} />
 
-                Télécharger le CV
+                Voir mon CV
 
               </a>
 

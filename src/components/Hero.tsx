@@ -1,7 +1,6 @@
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 
-import resumefile from "../assets/file/Rochel.pdf";
 import profileImage from "../assets/images/id.png";
 
 import profile from "../data/profile";
@@ -10,6 +9,17 @@ import statistics from "../data/statistics";
 import Button from "./ui/Button";
 import social from "../data/social";
 import SocialIcon from "./ui/SocialIcon";
+
+/* =========================================================
+   CV CANVA
+========================================================= */
+
+const resumeUrl =
+  "https://canva.link/vkfiwl41d9odhym";
+
+/* =========================================================
+   HERO
+========================================================= */
 
 export default function Hero() {
   return (
@@ -378,6 +388,8 @@ export default function Hero() {
             "
           >
 
+            {/* Projets */}
+
             <Button
               href="#projects"
               primary
@@ -385,11 +397,43 @@ export default function Hero() {
               Découvrir mes projets
             </Button>
 
-            <Button
-              href={resumefile}
+
+            {/* CV CANVA */}
+
+            <a
+              href={resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                inline-flex
+                items-center
+                justify-center
+                gap-2
+                rounded-xl
+                border
+                border-zinc-300
+                dark:border-zinc-700
+                bg-white
+                dark:bg-zinc-900
+                px-6
+                py-3
+                font-medium
+                text-zinc-800
+                dark:text-white
+                hover:border-emerald-400
+                hover:text-emerald-500
+                dark:hover:text-emerald-400
+                transition-all
+                duration-300
+                hover:scale-105
+                shadow-lg
+                hover:shadow-emerald-500/20
+              "
             >
-              Télécharger mon CV
-            </Button>
+              <ExternalLink size={18} />
+
+              Voir mon CV
+            </a>
 
           </motion.div>
 
@@ -738,7 +782,7 @@ export default function Hero() {
 
 
           {/* =================================================
-              PETITES PARTICULES
+              PARTICULES
           ================================================== */}
 
           {[...Array(18)].map((_, index) => (
