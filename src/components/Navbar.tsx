@@ -248,9 +248,8 @@ export default function Navbar() {
               hover:scale-105
             "
           >
-            <Download size={18} />
 
-            CV
+             Voir mon CV
           </a>
 
 
@@ -424,8 +423,6 @@ export default function Navbar() {
                   shadow-emerald-500/20
                 "
               >
-
-                <Download size={18} />
 
                 Voir mon CV
 
